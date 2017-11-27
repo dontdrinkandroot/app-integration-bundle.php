@@ -6,10 +6,16 @@
     "authors": [
         {
             "name": "Philip Washington Sorst",
-            "email": "philip@sorst.net"
+            "email": "philip@sorst.net",
+            "homepage": "https://sorst.net"
         }
     ],
     "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Dontdrinkandroot\\AngularIntegrationBundle\\": ""
+        }
+    },
     "require": {
         "php": ">=7.1"
     },
