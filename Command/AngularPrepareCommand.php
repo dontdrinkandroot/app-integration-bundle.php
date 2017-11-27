@@ -1,5 +1,7 @@
 <?php
 
+namespace Dontdrinkandroot\AngularIntegrationBundle\DependencyInjection;
+
 use Symfony\Component\Console\Command\Command;
 
 /**
