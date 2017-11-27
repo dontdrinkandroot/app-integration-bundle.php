@@ -1,0 +1,14 @@
+{
+    "name": "dontdrinkandroot/angular-integration-bundle",
+    "description": "Bundle that allows to integrate Angular within Symfony",
+    "type": "symfony-bundle",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Philip Washington Sorst",
+            "email": "philip@sorst.net"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
