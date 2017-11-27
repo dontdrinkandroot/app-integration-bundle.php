@@ -1,0 +1,9 @@
+services:
+    ddr_angular_integration.service.integration:
+        class: Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService
+        arguments:
+            - '@kernel'
+            - '%ddr_angular_integration.base_href%'
+            - '%ddr_angular_integration.angular_path%'
+            - '%ddr_angular_integration.api_path%'
+            - '%ddr_angular_integration.angular_directory%'

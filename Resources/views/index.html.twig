@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ name }}</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/icon_180.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon_32.png">
+    <meta name="theme-color" content="{{ themeColor }}">
+</head>
+<body>
+<app-root>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        app-root {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: {{ themeColor }};
+            color: white;
+            z-index: 2;
+        }
+
+        app-root .app-loader-content {
+            text-align: center;
+            animation: pulse 1s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.875);
+            }
+            100% {
+                transform: scale(1);
+            }
+
+        }
+    </style>
+    <div class="app-loader-content">
+        <img src="assets/icons/icon_192.png" />
+    </div>
+</app-root>
+</body>
+</html>
