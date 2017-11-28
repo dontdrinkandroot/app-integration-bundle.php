@@ -53,7 +53,7 @@ class AngularIntegrationService
      */
     public function getAngularDirectory(): string
     {
-        return $this->angularDirectory;
+        return realpath($this->angularDirectory);
     }
 
     public function getAngularBaseHref(): string
