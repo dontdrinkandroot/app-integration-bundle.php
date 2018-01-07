@@ -3,6 +3,7 @@
 namespace Dontdrinkandroot\AngularIntegrationBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
@@ -16,7 +17,9 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
      */
     protected function configure()
     {
-        $this->setName('ddr:angular:prepare');
+        $this
+            ->setName('ddr:angular:prepare')
+            ->addOption('skip-npm', InputOption::VALUE_OPTIONAL);
     }
 
     /**
@@ -24,7 +27,9 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->runNpmInstall($output);
+        if (true !== $input->getOption('skip-npm')) {
+            $this->runNpmInstall($output);
+        }
         $this->configureApiEndpoint($output);
         $this->writeIndex($output);
         $this->writeManifest($output);
@@ -73,6 +78,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
                 'shortName'       => $this->getContainer()->getParameter('ddr_angular_integration.short_name'),
                 'themeColor'      => $this->getContainer()->getParameter('ddr_angular_integration.theme_color'),
                 'backgroundColor' => $this->getContainer()->getParameter('ddr_angular_integration.background_color'),
+                'externalStyles'  => $this->getContainer()->getParameter('ddr_angular_integration.external_styles'),
             ]
         );
         file_put_contents($this->getIntegrationService()->getAngularDirectory() . '/src/index.html', $manifestContent);

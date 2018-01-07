@@ -5,7 +5,9 @@
     <title>{{ name }}</title>
     <base href="{{ startUrl }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    {% for externalStyle in externalStyles %}
+        <link rel="stylesheet" href="{{ externalStyle }}" />
+    {% endfor %}
     <link rel="manifest" href="manifest.json" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/icon_180.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon_32.png">
@@ -24,7 +26,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: {{ themeColor }};
+            background: {{ backgroundColor }};
             color: white;
             z-index: 2;
         }
