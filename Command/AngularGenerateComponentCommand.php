@@ -35,7 +35,7 @@ class AngularGenerateComponentCommand extends AbstractAngularIntegrationCommand
         $className = $this->dashesToCamelCase($name). 'Component';
 
         $content = $this->getTwig()->render(
-            'DdrAngularIntegrationBundle::component.twig.ts',
+            'DdrAngularIntegrationBundle::component.ts.twig',
             [
                 'htmlFilename' => $htmlFilename,
                 'className' => $className

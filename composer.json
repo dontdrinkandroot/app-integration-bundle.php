@@ -23,7 +23,8 @@
         "symfony/console": "^3.0",
         "symfony/dependency-injection": "^3.0",
         "symfony/framework-bundle": "^3.0",
-        "symfony/process": "^3.0"
+        "symfony/process": "^3.0",
+        "twig/twig": "^2.0"
     },
     "require-dev": {
     }

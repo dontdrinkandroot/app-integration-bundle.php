@@ -56,7 +56,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
     {
         $output->writeln('Configuring API endpoint: ' . $this->getIntegrationService()->getApiBaseHref());
         $apiConfigTs = $this->getTwig()->render(
-            'DdrAngularIntegrationBundle::api-config.twig.ts',
+            'DdrAngularIntegrationBundle::api-config.ts.twig',
             [
                 'baseUrl' => $this->getIntegrationService()->getApiBaseHref()
             ]
@@ -88,7 +88,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
     {
         $output->writeln('Writing Manifest');
         $manifestContent = $this->getTwig()->render(
-            'DdrAngularIntegrationBundle::manifest.twig.json',
+            'DdrAngularIntegrationBundle::manifest.json.twig',
             [
                 'startUrl'        => $this->getIntegrationService()->getAngularBaseHref(),
                 'name'            => $this->getContainer()->getParameter('ddr_angular_integration.name'),
