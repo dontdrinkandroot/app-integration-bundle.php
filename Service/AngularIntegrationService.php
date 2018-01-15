@@ -2,7 +2,7 @@
 
 namespace Dontdrinkandroot\AngularIntegrationBundle\Service;
 
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
@@ -30,22 +30,57 @@ class AngularIntegrationService
     private $apiPath;
 
     /**
-     * @var Kernel
+     * @var KernelInterface
      */
     private $kernel;
 
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var string
+     */
+    private $shortName;
+
+    /**
+     * @var string
+     */
+    private $themeColor;
+
+    /**
+     * @var string
+     */
+    private $backgroundColor;
+
+    /**
+     * @var array
+     */
+    private $externalStyles;
+
     public function __construct(
-        Kernel $kernel,
+        KernelInterface $kernel,
         string $baseHref,
         string $angularPath,
         string $apiPath,
-        string $angularDirectory
+        string $angularDirectory,
+        string $name,
+        string $shortName,
+        string $themeColor,
+        string $backgroundColor,
+        array $externalStyles
     ) {
         $this->angularDirectory = $angularDirectory;
         $this->baseHref = $baseHref;
         $this->angularPath = $angularPath;
         $this->apiPath = $apiPath;
         $this->kernel = $kernel;
+        $this->name = $name;
+        $this->shortName = $shortName;
+        $this->themeColor = $themeColor;
+        $this->backgroundColor = $backgroundColor;
+        $this->externalStyles = $externalStyles;
     }
 
     /**
@@ -63,7 +98,12 @@ class AngularIntegrationService
 
     public function getApiBaseHref(): string
     {
-        return $this->baseHref . $this->getEnvPrefix($this->kernel->getEnvironment()) . $this->apiPath;
+        return $this->baseHref . $this->getEnvPrefix($this->getEnvironment()) . $this->apiPath;
+    }
+
+    public function getEnvironment(): string
+    {
+        return $this->kernel->getEnvironment();
     }
 
     protected function getEnvPrefix(string $env): string
@@ -73,5 +113,45 @@ class AngularIntegrationService
         }
 
         return 'app_' . $env . '.php/';
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortName(): string
+    {
+        return $this->shortName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThemeColor(): string
+    {
+        return $this->themeColor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBackgroundColor(): string
+    {
+        return $this->backgroundColor;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExternalStyles(): array
+    {
+        return $this->externalStyles;
     }
 }

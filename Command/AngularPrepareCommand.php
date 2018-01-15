@@ -56,7 +56,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
     {
         $output->writeln('Configuring API endpoint: ' . $this->getIntegrationService()->getApiBaseHref());
         $apiConfigTs = $this->getTwig()->render(
-            'DdrAngularIntegrationBundle::api-config.ts.twig',
+            '@DdrAngularIntegration/api-config.ts.twig',
             [
                 'baseUrl' => $this->getIntegrationService()->getApiBaseHref()
             ]
@@ -71,14 +71,14 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
     {
         $output->writeln('Writing Index');
         $manifestContent = $this->getTwig()->render(
-            'DdrAngularIntegrationBundle::index.html.twig',
+            '@DdrAngularIntegration/index.html.twig',
             [
                 'startUrl'        => $this->getIntegrationService()->getAngularBaseHref(),
-                'name'            => $this->getContainer()->getParameter('ddr_angular_integration.name'),
-                'shortName'       => $this->getContainer()->getParameter('ddr_angular_integration.short_name'),
-                'themeColor'      => $this->getContainer()->getParameter('ddr_angular_integration.theme_color'),
-                'backgroundColor' => $this->getContainer()->getParameter('ddr_angular_integration.background_color'),
-                'externalStyles'  => $this->getContainer()->getParameter('ddr_angular_integration.external_styles'),
+                'name'            => $this->getIntegrationService()->getName(),
+                'shortName'       => $this->getIntegrationService()->getShortName(),
+                'themeColor'      => $this->getIntegrationService()->getThemeColor(),
+                'backgroundColor' => $this->getIntegrationService()->getBackgroundColor(),
+                'externalStyles'  => $this->getIntegrationService()->getExternalStyles(),
             ]
         );
         file_put_contents($this->getIntegrationService()->getAngularDirectory() . '/src/index.html', $manifestContent);
@@ -88,13 +88,13 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
     {
         $output->writeln('Writing Manifest');
         $manifestContent = $this->getTwig()->render(
-            'DdrAngularIntegrationBundle::manifest.json.twig',
+            '@DdrAngularIntegration/manifest.json.twig',
             [
                 'startUrl'        => $this->getIntegrationService()->getAngularBaseHref(),
-                'name'            => $this->getContainer()->getParameter('ddr_angular_integration.name'),
-                'shortName'       => $this->getContainer()->getParameter('ddr_angular_integration.short_name'),
-                'themeColor'      => $this->getContainer()->getParameter('ddr_angular_integration.theme_color'),
-                'backgroundColor' => $this->getContainer()->getParameter('ddr_angular_integration.background_color'),
+                'name'            => $this->getIntegrationService()->getName(),
+                'shortName'       => $this->getIntegrationService()->getShortName(),
+                'themeColor'      => $this->getIntegrationService()->getThemeColor(),
+                'backgroundColor' => $this->getIntegrationService()->getBackgroundColor(),
             ]
         );
         file_put_contents(

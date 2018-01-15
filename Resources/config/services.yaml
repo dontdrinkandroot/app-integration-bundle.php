@@ -1,0 +1,35 @@
+services:
+
+    Dontdrinkandroot\AngularIntegrationBundle\Command\AngularPrepareCommand:
+        arguments:
+            - '@twig'
+            - '@Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService'
+        tags:
+            - { name: 'console.command', command: 'ddr:angular:prepare' }
+
+    Dontdrinkandroot\AngularIntegrationBundle\Command\AngularBuildCommand:
+        arguments:
+            - '@twig'
+            - '@Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService'
+        tags:
+            - { name: 'console.command', command: 'ddr:angular:build' }
+
+    Dontdrinkandroot\AngularIntegrationBundle\Command\AngularGenerateComponentCommand:
+        arguments:
+            - '@twig'
+            - '@Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService'
+        tags:
+            - { name: 'console.command', command: 'ddr:angular:generate:component' }
+
+    Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService:
+        arguments:
+            - '@kernel'
+            - '%ddr_angular_integration.base_href%'
+            - '%ddr_angular_integration.angular_path%'
+            - '%ddr_angular_integration.api_path%'
+            - '%ddr_angular_integration.angular_directory%'
+            - '%ddr_angular_integration.name%'
+            - '%ddr_angular_integration.short_name%'
+            - '%ddr_angular_integration.theme_color%'
+            - '%ddr_angular_integration.background_color%'
+            - '%ddr_angular_integration.external_styles%'

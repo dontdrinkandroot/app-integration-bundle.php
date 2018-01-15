@@ -17,7 +17,6 @@ class AngularGenerateComponentCommand extends AbstractAngularIntegrationCommand
     protected function configure()
     {
         $this
-            ->setName('ddr:angular:generate:component')
             ->addArgument('module', InputArgument::REQUIRED)
             ->addArgument('name', InputArgument::REQUIRED);
     }

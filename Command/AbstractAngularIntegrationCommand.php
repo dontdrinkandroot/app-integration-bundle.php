@@ -3,26 +3,43 @@
 namespace Dontdrinkandroot\AngularIntegrationBundle\Command;
 
 use Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Twig\Environment;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-abstract class AbstractAngularIntegrationCommand extends ContainerAwareCommand
+abstract class AbstractAngularIntegrationCommand extends Command
 {
-    protected function getEnvironment(): string
-    {
-        return $this->getContainer()->get('kernel')->getEnvironment();
+    /**
+     * @var Environment
+     */
+    private $twigEnvironment;
+
+    /**
+     * @var AngularIntegrationService
+     */
+    private $integrationService;
+
+    /**
+     * AbstractAngularIntegrationCommand constructor.
+     */
+    public function __construct(
+        Environment $twigEnvironment,
+        AngularIntegrationService $integrationService
+    ) {
+        parent::__construct();
+        $this->twigEnvironment = $twigEnvironment;
+        $this->integrationService = $integrationService;
     }
 
     protected function getIntegrationService(): AngularIntegrationService
     {
-        return $this->getContainer()->get('ddr_angular_integration.service.integration');
+        return $this->integrationService;
     }
 
     protected function getTwig(): Environment
     {
-        return $this->getContainer()->get('twig');
+        return $this->twigEnvironment;
     }
 }

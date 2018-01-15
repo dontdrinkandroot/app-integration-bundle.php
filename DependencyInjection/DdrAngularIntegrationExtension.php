@@ -21,7 +21,7 @@ class DdrAngularIntegrationExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
+        $loader->load('services.yaml');
 
         $container->setParameter('ddr_angular_integration.base_href', $config['base_href']);
         $container->setParameter('ddr_angular_integration.angular_directory', $config['angular_directory']);

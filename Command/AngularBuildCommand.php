@@ -14,20 +14,12 @@ class AngularBuildCommand extends AbstractAngularIntegrationCommand
     /**
      * {@inheritdoc}
      */
-    protected function configure()
-    {
-        $this->setName('ddr:angular:build');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Building Angular');
         $angularBuildCommandLine = 'npm run ng -- build --no-progress -bh ' . $this->getIntegrationService(
             )->getAngularBaseHref();
-        if ('prod' === $this->getEnvironment()) {
+        if ('prod' === $this->getIntegrationService()->getEnvironment()) {
             $angularBuildCommandLine .= ' -prod -aot';
         }
         $angularBuildProcess = new Process($angularBuildCommandLine);
