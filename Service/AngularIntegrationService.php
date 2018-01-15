@@ -2,6 +2,7 @@
 
 namespace Dontdrinkandroot\AngularIntegrationBundle\Service;
 
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -98,7 +99,7 @@ class AngularIntegrationService
 
     public function getApiBaseHref(): string
     {
-        return $this->baseHref . $this->getEnvPrefix($this->getEnvironment()) . $this->apiPath;
+        return $this->baseHref . $this->getFrontendControllerByEnv($this->getEnvironment()) . $this->apiPath;
     }
 
     public function getEnvironment(): string
@@ -106,9 +107,9 @@ class AngularIntegrationService
         return $this->kernel->getEnvironment();
     }
 
-    protected function getEnvPrefix(string $env): string
+    protected function getFrontendControllerByEnv(string $env): string
     {
-        if ('prod' === $env) {
+        if (Kernel::VERSION_ID >= 40000 || 'prod' === $env) {
             return '';
         }
 
