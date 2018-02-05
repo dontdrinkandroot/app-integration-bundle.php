@@ -11,6 +11,11 @@ use Symfony\Component\Process\Process;
  */
 class AngularBuildCommand extends AbstractAngularIntegrationCommand
 {
+    protected function configure()
+    {
+        $this->setName('ddr:angular:build');
+    }
+
     /**
      * {@inheritdoc}
      */
