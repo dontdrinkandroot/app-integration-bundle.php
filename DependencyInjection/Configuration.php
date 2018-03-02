@@ -28,6 +28,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('short_name')->isRequired()->end()
             ->scalarNode('theme_color')->defaultValue('#3f51b5')->end()
             ->scalarNode('background_color')->defaultValue('#3f51b5')->end()
+            ->scalarNode('package_manager')->defaultValue('yarn')->end()
             ->arrayNode('external_styles')
                 ->prototype('scalar')->end()
             ->end()

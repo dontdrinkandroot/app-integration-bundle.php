@@ -19,7 +19,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
     {
         $this
             ->setName('ddr:angular:prepare')
-            ->addOption('skip-npm', InputOption::VALUE_OPTIONAL);
+            ->addOption('skip-install', InputOption::VALUE_OPTIONAL);
     }
 
     /**
@@ -27,8 +27,8 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (true !== $input->getOption('skip-npm')) {
-            $this->runNpmInstall($output);
+        if (true !== $input->getOption('skip-install')) {
+            $this->runInstall($output);
         }
         $this->configureApiEndpoint($output);
         $this->writeIndex($output);
@@ -36,20 +36,74 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
         $this->generateIcons($output);
     }
 
-    private function runNpmInstall(OutputInterface $output)
+    private function runInstall(OutputInterface $output)
     {
-        $output->writeln('Installing Node Packages: npm install');
-        $npmInstallProcess = new Process('npm install');
-        $npmInstallProcess->setWorkingDirectory($this->getIntegrationService()->getAngularDirectory());
-        $npmInstallProcess->mustRun(
-            function ($type, $buffer) {
-                if (Process::ERR === $type) {
-                    echo 'ERR > ' . $buffer;
-                } else {
-                    echo 'OUT > ' . $buffer;
-                }
-            }
-        );
+        $packageManager = $this->getIntegrationService()->getPackageManager();
+
+        switch ($packageManager) {
+
+            case 'npm':
+
+                $output->writeln('Installing Node Packages: npm install');
+
+                $installProcess = new Process('npm install');
+                $installProcess->setWorkingDirectory($this->getIntegrationService()->getAngularDirectory());
+                $installProcess->mustRun(
+                    function ($type, $buffer) {
+                        if (Process::ERR === $type) {
+                            echo 'ERR > ' . $buffer;
+                        } else {
+                            echo 'OUT > ' . $buffer;
+                        }
+                    }
+                );
+
+                $outdatedProcess = new Process('npm outdated');
+                $outdatedProcess->setWorkingDirectory($this->getIntegrationService()->getAngularDirectory());
+                $outdatedProcess->run(
+                    function ($type, $buffer) {
+                        if (Process::ERR === $type) {
+                            echo 'ERR > ' . $buffer;
+                        } else {
+                            echo 'OUT > ' . $buffer;
+                        }
+                    }
+                );
+
+                break;
+
+            case 'yarn':
+
+                $output->writeln('Installing Node Packages: yarn install');
+                $installProcess = new Process('yarn install');
+                $installProcess->setWorkingDirectory($this->getIntegrationService()->getAngularDirectory());
+                $installProcess->mustRun(
+                    function ($type, $buffer) {
+                        if (Process::ERR === $type) {
+                            echo 'ERR > ' . $buffer;
+                        } else {
+                            echo 'OUT > ' . $buffer;
+                        }
+                    }
+                );
+
+                $outdatedProcess = new Process('yarn outdated');
+                $outdatedProcess->setWorkingDirectory($this->getIntegrationService()->getAngularDirectory());
+                $outdatedProcess->run(
+                    function ($type, $buffer) {
+                        if (Process::ERR === $type) {
+                            echo 'ERR > ' . $buffer;
+                        } else {
+                            echo 'OUT > ' . $buffer;
+                        }
+                    }
+                );
+
+                break;
+
+            default:
+                throw new \RuntimeException('Unsupported package manager: ' . $packageManager);
+        }
     }
 
     private function configureApiEndpoint(OutputInterface $output)

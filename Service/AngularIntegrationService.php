@@ -60,6 +60,11 @@ class AngularIntegrationService
      */
     private $externalStyles;
 
+    /**
+     * @var string
+     */
+    private $packageManager;
+
     public function __construct(
         KernelInterface $kernel,
         string $baseHref,
@@ -70,7 +75,8 @@ class AngularIntegrationService
         string $shortName,
         string $themeColor,
         string $backgroundColor,
-        array $externalStyles
+        array $externalStyles,
+    string $packageManager
     ) {
         $this->angularDirectory = $angularDirectory;
         $this->baseHref = $baseHref;
@@ -82,6 +88,7 @@ class AngularIntegrationService
         $this->themeColor = $themeColor;
         $this->backgroundColor = $backgroundColor;
         $this->externalStyles = $externalStyles;
+        $this->packageManager = $packageManager;
     }
 
     /**
@@ -154,5 +161,13 @@ class AngularIntegrationService
     public function getExternalStyles(): array
     {
         return $this->externalStyles;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPackageManager(): string
+    {
+        return $this->packageManager;
     }
 }

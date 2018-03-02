@@ -32,5 +32,6 @@ class DdrAngularIntegrationExtension extends Extension
         $container->setParameter('ddr_angular_integration.theme_color', $config['theme_color']);
         $container->setParameter('ddr_angular_integration.background_color', $config['background_color']);
         $container->setParameter('ddr_angular_integration.external_styles', $config['external_styles']);
+        $container->setParameter('ddr_angular_integration.package_manager', $config['package_manager']);
     }
 }
