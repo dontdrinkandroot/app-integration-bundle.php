@@ -161,7 +161,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
     {
         $output->writeln('Generating Icons');
 
-        $sizes = [16, 32, 48, 96, 144, 180, 192];
+        $sizes = [16, 32, 48, 72, 96, 128, 144, 152, 180, 192, 384, 512];
 
         //convert -background none angular/src/assets/icons/template.svg -resize 192x192 angular/src/assets/icons/icon_192.png
 
