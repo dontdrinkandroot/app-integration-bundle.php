@@ -11,13 +11,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class AngularGenerateComponentCommand extends AbstractAngularIntegrationCommand
 {
+    protected static $defaultName = 'ddr:app:angular:generate:component';
+
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this
-            ->setName('ddr:angular:generate:component')
             ->addArgument('module', InputArgument::REQUIRED)
             ->addArgument('name', InputArgument::REQUIRED);
     }

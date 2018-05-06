@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-class DdrAngularIntegrationExtension extends Extension
+class DdrAppIntegrationExtension extends Extension
 {
     /**
      * {@inheritdoc}

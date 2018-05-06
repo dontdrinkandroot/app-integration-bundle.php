@@ -12,13 +12,14 @@ use Symfony\Component\Process\Process;
  */
 class AngularPrepareCommand extends AbstractAngularIntegrationCommand
 {
+    protected static $defaultName = 'ddr:app:angular:prepare';
+
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
         $this
-            ->setName('ddr:angular:prepare')
             ->addOption('skip-install', InputOption::VALUE_OPTIONAL);
     }
 
