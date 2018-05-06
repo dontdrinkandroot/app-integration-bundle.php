@@ -1,6 +1,6 @@
 <?php
 
-namespace Dontdrinkandroot\AngularIntegrationBundle\DependencyInjection;
+namespace Dontdrinkandroot\AppIntegrationBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

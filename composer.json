@@ -1,6 +1,6 @@
 {
-    "name": "dontdrinkandroot/angular-integration-bundle",
-    "description": "Bundle that allows to integrate Angular within Symfony",
+    "name": "dontdrinkandroot/app-integration-bundle",
+    "description": "Bundle that helps you building an api-platform backed Angular PWA",
     "type": "symfony-bundle",
     "license": "Apache-2.0",
     "authors": [
@@ -13,7 +13,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "Dontdrinkandroot\\AngularIntegrationBundle\\": ""
+            "Dontdrinkandroot\\AppIntegrationBundle\\": ""
         }
     },
     "require": {

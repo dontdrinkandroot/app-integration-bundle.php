@@ -1,8 +1,8 @@
 <?php
 
-namespace Dontdrinkandroot\AngularIntegrationBundle\Command;
+namespace Dontdrinkandroot\AppIntegrationBundle\Command;
 
-use Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService;
+use Dontdrinkandroot\AppIntegrationBundle\Service\AngularIntegrationService;
 use Symfony\Component\Console\Command\Command;
 use Twig\Environment;
 

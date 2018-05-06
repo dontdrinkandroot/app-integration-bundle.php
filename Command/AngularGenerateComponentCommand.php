@@ -1,6 +1,6 @@
 <?php
 
-namespace Dontdrinkandroot\AngularIntegrationBundle\Command;
+namespace Dontdrinkandroot\AppIntegrationBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,7 +35,7 @@ class AngularGenerateComponentCommand extends AbstractAngularIntegrationCommand
         $className = $this->dashesToCamelCase($name). 'Component';
 
         $content = $this->getTwig()->render(
-            'DdrAngularIntegrationBundle::component.ts.twig',
+            'DdrAppIntegrationBundle::component.ts.twig',
             [
                 'htmlFilename' => $htmlFilename,
                 'className' => $className

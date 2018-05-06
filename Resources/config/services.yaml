@@ -1,27 +1,27 @@
 services:
 
-    Dontdrinkandroot\AngularIntegrationBundle\Command\AngularPrepareCommand:
+    Dontdrinkandroot\AppIntegrationBundle\Command\AngularPrepareCommand:
         arguments:
             - '@twig'
-            - '@Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService'
+            - '@Dontdrinkandroot\AppIntegrationBundle\Service\AngularIntegrationService'
         tags:
             - { name: 'console.command', command: 'ddr:angular:prepare' }
 
-    Dontdrinkandroot\AngularIntegrationBundle\Command\AngularBuildCommand:
+    Dontdrinkandroot\AppIntegrationBundle\Command\AngularBuildCommand:
         arguments:
             - '@twig'
-            - '@Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService'
+            - '@Dontdrinkandroot\AppIntegrationBundle\Service\AngularIntegrationService'
         tags:
             - { name: 'console.command', command: 'ddr:angular:build' }
 
-    Dontdrinkandroot\AngularIntegrationBundle\Command\AngularGenerateComponentCommand:
+    Dontdrinkandroot\AppIntegrationBundle\Command\AngularGenerateComponentCommand:
         arguments:
             - '@twig'
-            - '@Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService'
+            - '@Dontdrinkandroot\AppIntegrationBundle\Service\AngularIntegrationService'
         tags:
             - { name: 'console.command', command: 'ddr:angular:generate:component' }
 
-    Dontdrinkandroot\AngularIntegrationBundle\Service\AngularIntegrationService:
+    Dontdrinkandroot\AppIntegrationBundle\Service\AngularIntegrationService:
         arguments:
             - '@kernel'
             - '%ddr_angular_integration.base_href%'

@@ -1,13 +1,13 @@
 <?php
 
-namespace Dontdrinkandroot\AngularIntegrationBundle;
+namespace Dontdrinkandroot\AppIntegrationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Philip Washington Sorst <philip@sorst.net>
  */
-class DdrAngularIntegrationBundle extends Bundle
+class DdrAppIntegrationBundle extends Bundle
 {
 
 }

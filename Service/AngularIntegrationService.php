@@ -1,6 +1,6 @@
 <?php
 
-namespace Dontdrinkandroot\AngularIntegrationBundle\Service;
+namespace Dontdrinkandroot\AppIntegrationBundle\Service;
 
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
