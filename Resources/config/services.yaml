@@ -34,8 +34,3 @@ services:
             - '%ddr_angular_integration.background_color%'
             - '%ddr_angular_integration.external_styles%'
             - '%ddr_angular_integration.package_manager%'
-
-    Dontdrinkandroot\AppIntegrationBundle\Serializer\OperationContextBuilder:
-        decorates: 'api_platform.serializer.context_builder'
-        arguments: [ '@Dontdrinkandroot\AppIntegrationBundle\Serializer\OperationContextBuilder.inner' ]
-        autoconfigure: false

@@ -1,0 +1,6 @@
+services:
+
+    Dontdrinkandroot\AppIntegrationBundle\Serializer\OperationContextBuilder:
+        decorates: 'api_platform.serializer.context_builder'
+        arguments: [ '@Dontdrinkandroot\AppIntegrationBundle\Serializer\OperationContextBuilder.inner' ]
+        autoconfigure: false

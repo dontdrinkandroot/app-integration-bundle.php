@@ -24,9 +24,12 @@
         "symfony/dependency-injection": "^3.0 | ^4.0",
         "symfony/framework-bundle": "^3.0 | ^4.0",
         "symfony/process": "^3.0 | ^4.0",
-        "twig/twig": "^2.0",
-        "api-platform/core": "^2.2"
+        "twig/twig": "^2.0"
     },
     "require-dev": {
+        "api-platform/core": "^2.2"
+    },
+    "recommended": {
+        "api-platform/core": "For Api Platform Integration"
     }
 }
