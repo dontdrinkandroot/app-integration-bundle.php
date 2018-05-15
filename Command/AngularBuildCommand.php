@@ -19,10 +19,10 @@ class AngularBuildCommand extends AbstractAngularIntegrationCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $output->writeln('Building Angular');
-        $angularBuildCommandLine = 'npm run ng -- build --no-progress -bh ' . $this->getIntegrationService(
+        $angularBuildCommandLine = 'npm run ng -- build --no-progress --base-href ' . $this->getIntegrationService(
             )->getAngularBaseHref();
         if ('prod' === $this->getIntegrationService()->getEnvironment()) {
-            $angularBuildCommandLine .= ' -prod -aot';
+            $angularBuildCommandLine .= ' --prod --aot';
         }
         $angularBuildProcess = new Process($angularBuildCommandLine);
         $angularBuildProcess->setTimeout(300);
