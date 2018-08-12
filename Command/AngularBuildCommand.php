@@ -3,6 +3,7 @@
 namespace Dontdrinkandroot\AppIntegrationBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Process;
 
@@ -16,12 +17,23 @@ class AngularBuildCommand extends AbstractAngularIntegrationCommand
     /**
      * {@inheritdoc}
      */
+    protected function configure()
+    {
+        $this
+            ->addOption('force-prod', null, InputOption::VALUE_NONE);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $forceProd = $input->getOption('force-prod');
+
         $output->writeln('Building Angular');
         $angularBuildCommandLine = 'npm run ng -- build --no-progress --base-href ' . $this->getIntegrationService(
             )->getAngularBaseHref();
-        if ('prod' === $this->getIntegrationService()->getEnvironment()) {
+        if ($forceProd || $this->getIntegrationService()->isProd()) {
             $angularBuildCommandLine .= ' --prod --aot';
         }
         $angularBuildProcess = new Process($angularBuildCommandLine);

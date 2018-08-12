@@ -76,7 +76,7 @@ class AngularIntegrationService
         string $themeColor,
         string $backgroundColor,
         array $externalStyles,
-    string $packageManager
+        string $packageManager
     ) {
         $this->angularDirectory = $angularDirectory;
         $this->baseHref = $baseHref;
@@ -112,6 +112,11 @@ class AngularIntegrationService
     public function getEnvironment(): string
     {
         return $this->kernel->getEnvironment();
+    }
+
+    public function isProd(): bool
+    {
+        return 'prod' === $this->getEnvironment();
     }
 
     protected function getFrontendControllerByEnv(string $env): string
