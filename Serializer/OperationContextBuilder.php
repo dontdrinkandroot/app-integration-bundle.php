@@ -30,6 +30,8 @@ class OperationContextBuilder implements SerializerContextBuilderInterface
         $operationPrefix = null;
         $resourceClass = null;
         $subresourceProperty = null;
+        $customOperationName = null;
+
         switch ($context['operation_type']) {
             case 'collection':
                 switch ($context['collection_operation_name']) {
@@ -58,6 +60,13 @@ class OperationContextBuilder implements SerializerContextBuilderInterface
                             $operationPrefix = 'get';
                         }
                         break;
+                    default:
+                        $customOperationName = $context['item_operation_name'];
+                        if (!$normalization) {
+                            $operationPrefix = strtolower($request->getMethod());
+                        } else {
+                            $operationPrefix = 'get';
+                        }
                 }
                 $resourceClass = $this->getShortName($context['resource_class']);
                 break;
@@ -75,6 +84,9 @@ class OperationContextBuilder implements SerializerContextBuilderInterface
         $group = $operationPrefix . '.' . $resourceClass;
         if (null != $subresourceProperty) {
             $group .= '.' . $subresourceProperty;
+        }
+        if (null != $customOperationName) {
+            $group .= '.' . $customOperationName;
         }
         $context['groups'][] = $group;
 
