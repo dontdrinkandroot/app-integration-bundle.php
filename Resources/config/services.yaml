@@ -21,6 +21,7 @@ services:
             - '%ddr_angular_integration.angular_path%'
             - '%ddr_angular_integration.api_path%'
             - '%ddr_angular_integration.angular_directory%'
+            - '%ddr_angular_integration.angular_src_directory%'
             - '%ddr_angular_integration.name%'
             - '%ddr_angular_integration.short_name%'
             - '%ddr_angular_integration.theme_color%'

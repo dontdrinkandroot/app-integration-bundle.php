@@ -22,6 +22,7 @@ class Configuration implements ConfigurationInterface
         $rootNode->children()
             ->scalarNode('base_href')->defaultValue('http://localhost:8000/')->end()
             ->scalarNode('angular_directory')->defaultValue('%kernel.root_dir%/../angular/')->end()
+            ->scalarNode('angular_src_directory')->defaultValue('%kernel.root_dir%/../angular/src/')->end()
             ->scalarNode('angular_path')->defaultValue('app/')->end()
             ->scalarNode('api_path')->defaultValue('api/')->end()
             ->scalarNode('name')->isRequired()->end()

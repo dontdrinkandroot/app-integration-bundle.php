@@ -117,7 +117,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
             ]
         );
         file_put_contents(
-            $this->getIntegrationService()->getAngularDirectory() . '/src/environments/api-config.ts',
+            $this->getIntegrationService()->getAngularSrcDirectory() . '/environments/api-config.ts',
             $apiConfigTs
         );
     }
@@ -136,7 +136,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
                 'externalStyles'  => $this->getIntegrationService()->getExternalStyles(),
             ]
         );
-        file_put_contents($this->getIntegrationService()->getAngularDirectory() . '/src/index.html', $manifestContent);
+        file_put_contents($this->getIntegrationService()->getAngularSrcDirectory() . '/index.html', $manifestContent);
     }
 
     private function writeManifest(OutputInterface $output)
@@ -153,7 +153,7 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
             ]
         );
         file_put_contents(
-            $this->getIntegrationService()->getAngularDirectory() . '/src/manifest.json',
+            $this->getIntegrationService()->getAngularSrcDirectory() . '/manifest.json',
             $manifestContent
         );
     }
@@ -168,10 +168,10 @@ class AngularPrepareCommand extends AbstractAngularIntegrationCommand
 
         foreach ($sizes as $size) {
             $convertProcess = new Process(
-                'rsvg-convert -w ' . $size . ' -h ' . $size . ' -o src/assets/icons/icon_' . $size . '.png src/assets/icons/template.svg'
+                'rsvg-convert -w ' . $size . ' -h ' . $size . ' -o assets/icons/icon_' . $size . '.png assets/icons/template.svg'
             );
             $output->writeln($convertProcess->getCommandLine());
-            $convertProcess->setWorkingDirectory($this->getIntegrationService()->getAngularDirectory());
+            $convertProcess->setWorkingDirectory($this->getIntegrationService()->getAngularSrcDirectory());
             $convertProcess->mustRun(
                 function ($type, $buffer) {
                     if (Process::ERR === $type) {

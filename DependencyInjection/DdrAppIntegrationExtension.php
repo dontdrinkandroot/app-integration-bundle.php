@@ -31,6 +31,7 @@ class DdrAppIntegrationExtension extends Extension
 
         $container->setParameter('ddr_angular_integration.base_href', $config['base_href']);
         $container->setParameter('ddr_angular_integration.angular_directory', $config['angular_directory']);
+        $container->setParameter('ddr_angular_integration.angular_src_directory', $config['angular_src_directory']);
         $container->setParameter('ddr_angular_integration.angular_path', $config['angular_path']);
         $container->setParameter('ddr_angular_integration.api_path', $config['api_path']);
         $container->setParameter('ddr_angular_integration.name', $config['name']);

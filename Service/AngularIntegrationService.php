@@ -65,12 +65,18 @@ class AngularIntegrationService
      */
     private $packageManager;
 
+    /**
+     * @var string
+     */
+    private $angularSrcDirectory;
+
     public function __construct(
         KernelInterface $kernel,
         string $baseHref,
         string $angularPath,
         string $apiPath,
         string $angularDirectory,
+        string $angularSrcDirectory,
         string $name,
         string $shortName,
         string $themeColor,
@@ -89,14 +95,17 @@ class AngularIntegrationService
         $this->backgroundColor = $backgroundColor;
         $this->externalStyles = $externalStyles;
         $this->packageManager = $packageManager;
+        $this->angularSrcDirectory = $angularSrcDirectory;
     }
 
-    /**
-     * @return string
-     */
     public function getAngularDirectory(): string
     {
         return realpath($this->angularDirectory);
+    }
+
+    public function getAngularSrcDirectory(): string
+    {
+        return realpath($this->angularSrcDirectory);
     }
 
     public function getAngularBaseHref(): string
@@ -128,49 +137,31 @@ class AngularIntegrationService
         return 'app_' . $env . '.php/';
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getShortName(): string
     {
         return $this->shortName;
     }
 
-    /**
-     * @return string
-     */
     public function getThemeColor(): string
     {
         return $this->themeColor;
     }
 
-    /**
-     * @return string
-     */
     public function getBackgroundColor(): string
     {
         return $this->backgroundColor;
     }
 
-    /**
-     * @return array
-     */
     public function getExternalStyles(): array
     {
         return $this->externalStyles;
     }
 
-    /**
-     * @return string
-     */
     public function getPackageManager(): string
     {
         return $this->packageManager;
