@@ -14,13 +14,6 @@ services:
         tags:
             - { name: 'console.command', command: 'ddr:angular:build' }
 
-    Dontdrinkandroot\AppIntegrationBundle\Command\AngularGenerateComponentCommand:
-        arguments:
-            - '@twig'
-            - '@Dontdrinkandroot\AppIntegrationBundle\Service\AngularIntegrationService'
-        tags:
-            - { name: 'console.command', command: 'ddr:angular:generate:component' }
-
     Dontdrinkandroot\AppIntegrationBundle\Service\AngularIntegrationService:
         arguments:
             - '@kernel'
