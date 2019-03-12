@@ -73,8 +73,6 @@ trait ApiTestTrait
 
     protected function assertJsonResponse(Response $response, $statusCode = 200)
     {
-        Assert::assertEquals($statusCode, $response->getStatusCode());
-
         if (Response::HTTP_NO_CONTENT !== $statusCode) {
 
             Assert::assertTrue(
@@ -85,6 +83,8 @@ trait ApiTestTrait
 
         $content = $response->getContent();
         $decodedContent = json_decode($content, true);
+
+        Assert::assertEquals($statusCode, $response->getStatusCode(), $content);
 
         return $decodedContent;
     }
