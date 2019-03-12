@@ -18,18 +18,20 @@
     },
     "require": {
         "php": ">=7.1",
-        "symfony/config": "^3.0 | ^4.0",
-        "symfony/http-kernel": "^3.0 | ^4.0",
-        "symfony/console": "^3.0 | ^4.0",
-        "symfony/dependency-injection": "^3.0 | ^4.0",
-        "symfony/framework-bundle": "^3.0 | ^4.0",
-        "symfony/process": "^3.0 | ^4.0",
+        "symfony/config": "^4.0",
+        "symfony/http-kernel": "^4.0",
+        "symfony/console": "^4.0",
+        "symfony/dependency-injection": "^4.0",
+        "symfony/framework-bundle": "^4.0",
+        "symfony/process": "^4.0",
         "twig/twig": "^2.0"
     },
     "require-dev": {
-        "api-platform/core": "^2.2"
+        "api-platform/core": "^2.2",
+        "symfony/security-core": "^4.0",
+        "phpunit/phpunit": "^6.0"
     },
-    "recommended": {
+    "suggest": {
         "api-platform/core": "For Api Platform Integration"
     }
 }
