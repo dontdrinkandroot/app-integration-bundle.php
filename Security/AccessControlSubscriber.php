@@ -40,8 +40,10 @@ class AccessControlSubscriber implements EventSubscriberInterface
 
     public function performAccessControl(GetResponseEvent $event)
     {
-        if ($event->getRequest()->attributes->has(ApiRequestAttributes::ATTRIBUTE_API_RESOURCE_CLASS)
-            && !$this->authorizationChecker->isGranted(ApiVoter::SECURITY_ATTRIBUTE, $event)) {
+        if (
+            $event->getRequest()->attributes->has(ApiRequestAttributes::ATTRIBUTE_API_RESOURCE_CLASS)
+            && !$this->authorizationChecker->isGranted(ApiVoter::SECURITY_ATTRIBUTE, $event)
+        ) {
             throw new AccessDeniedException();
         }
     }

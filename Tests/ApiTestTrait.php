@@ -29,18 +29,20 @@ trait ApiTestTrait
         string $uri,
         array $parameters = [],
         array $headers = [],
-        ?array $content = null
+        ?array $content = null,
+        array $files = []
     ): Response {
-        return $this->jsonRequest(Request::METHOD_PUT, $uri, $parameters, $headers, $content);
+        return $this->jsonRequest(Request::METHOD_PUT, $uri, $parameters, $headers, $content, $files);
     }
 
     protected function jsonPost(
         string $uri,
         array $parameters = [],
         array $headers = [],
-        ?array $content = null
+        ?array $content = null,
+        array $files = []
     ): Response {
-        return $this->jsonRequest(Request::METHOD_POST, $uri, $parameters, $headers, $content);
+        return $this->jsonRequest(Request::METHOD_POST, $uri, $parameters, $headers, $content, $files);
     }
 
     protected function jsonDelete(
@@ -56,14 +58,15 @@ trait ApiTestTrait
         string $uri,
         array $parameters = [],
         array $headers = [],
-        ?array $content = null
+        ?array $content = null,
+        array $files = []
     ): Response {
         $client = $this->getClient();
         $client->request(
             $method,
             $uri,
             $parameters,
-            [],
+            $files,
             $this->transformHeaders($headers),
             $this->jsonEncodeContent($content)
         );
@@ -112,12 +115,12 @@ trait ApiTestTrait
     protected function transformHeaders(array $headers)
     {
         $transformedHeaders = [
-            'HTTP_ACCEPT' => 'application/json',
+            'HTTP_ACCEPT'  => 'application/json',
             'CONTENT_TYPE' => 'application/json',
         ];
         foreach ($headers as $key => $value) {
             if (strpos($key, 'PHP_') !== 0) {
-                $transformedHeaders['HTTP_'.$key] = $value;
+                $transformedHeaders['HTTP_' . $key] = $value;
             } else {
                 $transformedHeaders[$key] = $value;
             }
@@ -137,7 +140,7 @@ trait ApiTestTrait
     protected function createJwtAuthorizationHeader(UserInterface $user, array $headers = [])
     {
         $token = $this->getContainer()->get('lexik_jwt_authentication.jwt_manager')->create($user);
-        $headers['Authorization'] = 'Bearer '.$token;
+        $headers['Authorization'] = 'Bearer ' . $token;
 
         return $headers;
     }
@@ -148,6 +151,15 @@ trait ApiTestTrait
         $headers['PHP_AUTH_PW'] = $user->getUsername();
 
         return $headers;
+    }
+
+    protected function assertArrayHasKeyAndUnset($key, &$array, $message = '')
+    {
+        Assert::assertArrayHasKey($key, $array, $message);
+        $value = $array[$key];
+        unset($array[$key]);
+
+        return $value;
     }
 
     protected abstract function getContainer(): ContainerInterface;
