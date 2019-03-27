@@ -31,64 +31,59 @@ class OperationContextBuilder implements SerializerContextBuilderInterface
         $resourceClass = null;
         $subresourceProperty = null;
         $customOperationName = null;
+        $readOperation = true;
 
         switch ($context['operation_type']) {
+
             case 'collection':
                 switch ($context['collection_operation_name']) {
                     case 'get':
                         $operationPrefix = 'list';
                         break;
                     case 'post':
-                        if (!$normalization) {
-                            $operationPrefix = 'post';
-                        } else {
-                            $operationPrefix = 'get';
-                        }
+                        $operationPrefix = $normalization ? 'get' : 'post';
+                        $readOperation = $normalization;
                         break;
                 }
                 $resourceClass = $this->getShortName($context['resource_class']);
                 break;
+
             case 'item':
                 switch ($context['item_operation_name']) {
                     case 'get':
                         $operationPrefix = 'get';
                         break;
                     case 'put':
-                        if (!$normalization) {
-                            $operationPrefix = 'put';
-                        } else {
-                            $operationPrefix = 'get';
-                        }
+                        $operationPrefix = $normalization ? 'get' : 'put';
+                        $readOperation = $normalization;
                         break;
                     default:
                         $customOperationName = $context['item_operation_name'];
-                        if (!$normalization) {
-                            $operationPrefix = strtolower($request->getMethod());
-                        } else {
-                            $operationPrefix = 'get';
-                        }
+                        $operationPrefix = $normalization ? 'get' : strtolower($request->getMethod());
+                        $readOperation = $normalization;
                 }
                 $resourceClass = $this->getShortName($context['resource_class']);
                 break;
+
             case 'subresource':
-                if ($this->isSubresourceCollection($request)) {
-                    $operationPrefix = 'list';
-                } else {
-                    $operationPrefix = 'get';
-                }
+                $operationPrefix = $this->isSubresourceCollection($request) ? 'list' : 'get';
                 $resourceClass = $this->getShortName(key($context['subresource_resources']));
                 $subresourceProperty = $this->getSubresourceProperty($request);
                 break;
         }
 
         $group = $operationPrefix . '.' . $resourceClass;
+
         if (null != $subresourceProperty) {
             $group .= '.' . $subresourceProperty;
         }
+
         if (null != $customOperationName) {
             $group .= '.' . $customOperationName;
         }
+
         $context['groups'][] = $group;
+        $context['groups'][] = $readOperation ? 'api_read' : 'api_write';
 
         return $context;
     }
