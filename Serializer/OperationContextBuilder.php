@@ -3,6 +3,7 @@
 namespace Dontdrinkandroot\AppIntegrationBundle\Serializer;
 
 use ApiPlatform\Core\Serializer\SerializerContextBuilderInterface;
+use ReflectionClass;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -72,17 +73,19 @@ class OperationContextBuilder implements SerializerContextBuilderInterface
                 break;
         }
 
-        $group = $operationPrefix . '.' . $resourceClass;
+        $groupSuffix = $resourceClass;
 
         if (null != $subresourceProperty) {
-            $group .= '.' . $subresourceProperty;
+            $groupSuffix .= '.' . $subresourceProperty;
         }
 
         if (null != $customOperationName) {
-            $group .= '.' . $customOperationName;
+            $groupSuffix .= '.' . $customOperationName;
         }
 
-        $context['groups'][] = $group;
+        $context['groups'][] = $operationPrefix . '.' . $groupSuffix;
+        $context['groups'][] = 'all' . '.' . $groupSuffix;
+        $context['groups'][] = ($readOperation ? 'read' : 'write') . '.' . $groupSuffix;
         $context['groups'][] = $readOperation ? 'api_read' : 'api_write';
 
         return $context;
@@ -90,7 +93,7 @@ class OperationContextBuilder implements SerializerContextBuilderInterface
 
     private function getShortName(string $class): string
     {
-        $reflectedClass = new \ReflectionClass($class);
+        $reflectedClass = new ReflectionClass($class);
 
         return strtolower(preg_replace('~(?<=\\w)([A-Z])~', '_$1', $reflectedClass->getShortName()));
     }
