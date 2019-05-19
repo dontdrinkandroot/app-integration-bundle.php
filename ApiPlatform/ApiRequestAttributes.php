@@ -15,6 +15,7 @@ class ApiRequestAttributes
     const METHOD_POST = 'post';
     const METHOD_PUT = 'put';
     const METHOD_DELETE = 'delete';
+
     const ATTRIBUTE_ID = 'id';
     const ATTRIBUTE_DATA = 'data';
     const ATTRIBUTE_API_RESOURCE_CLASS = '_api_resource_class';
