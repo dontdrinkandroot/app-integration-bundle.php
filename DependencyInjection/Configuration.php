@@ -33,6 +33,13 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('external_styles')
                 ->prototype('scalar')->end()
             ->end()
+            ->arrayNode('api_platform')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->booleanNode('operation_context_builder')->defaultFalse()->end()
+                    ->booleanNode('access_control_subscriber')->defaultFalse()->end()
+                ->end()
+            ->end()
         ->end();
         // @formatter:on
 

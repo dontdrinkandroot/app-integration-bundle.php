@@ -4,9 +4,3 @@ services:
         decorates: 'api_platform.serializer.context_builder'
         arguments: [ '@Dontdrinkandroot\AppIntegrationBundle\Serializer\OperationContextBuilder.inner' ]
         autoconfigure: false
-
-    Dontdrinkandroot\AppIntegrationBundle\Security\AccessControlSubscriber:
-        arguments:
-            - '@security.authorization_checker'
-        tags:
-            - { name: 'kernel.event_subscriber' }

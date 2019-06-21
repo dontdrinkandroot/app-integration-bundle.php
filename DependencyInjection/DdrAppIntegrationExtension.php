@@ -26,9 +26,15 @@ class DdrAppIntegrationExtension extends Extension
         /** @var array $bundles */
         $bundles = $container->getParameter('kernel.bundles');
         if (array_key_exists('ApiPlatformBundle', $bundles)) {
-            $loader->load('services_api_platform.yaml');
+            if (array_key_exists('api_platform', $config)) {
+                if (true === $config['api_platform']['operation_context_builder']) {
+                    $loader->load('operation_context_builder.yaml');
+                }
+                if (true === $config['api_platform']['access_control_subscriber']) {
+                    $loader->load('access_control_subscriber.yaml');
+                }
+            }
         }
-
         $container->setParameter('ddr_angular_integration.base_href', $config['base_href']);
         $container->setParameter('ddr_angular_integration.angular_directory', $config['angular_directory']);
         $container->setParameter('ddr_angular_integration.angular_src_directory', $config['angular_src_directory']);
